@@ -1,4 +1,3 @@
-
 const express = require("express");
 const { apiPulse } = require("../src");
 const stats = require("../src/stats");
@@ -11,9 +10,7 @@ app.use(apiPulse);
 app.use(express.static(path.join(__dirname, "..", "public")));
 
 app.get("/stats", (req, res) => {
-    res.sendFile(
-        path.join(__dirname, "..", "public", "index.html")
-    );
+    res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });
 
 app.get("/", (req, res) => {
@@ -28,12 +25,7 @@ app.get("/users", (req, res) => {
 });
 
 app.get("/debug/stats", (req, res) => {
-    res.json({
-        ...stats,
-        averageResponseTime: stats.totalRequests > 0
-            ? stats.totalDuration / stats.totalRequests
-            : 0
-    });
+    res.json({...stats,averageResponseTime: stats.totalRequests > 0? stats.totalDuration / stats.totalRequests: 0});
 });
 
 app.listen(3000, () => {
