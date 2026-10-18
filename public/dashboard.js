@@ -22,6 +22,7 @@ async function updateDashboard() {
 
         document.getElementById("status5xx").textContent =
             stats.status5xx;
+
     } catch (error) {
         console.error("Failed to update dashboard:", error);
     }
