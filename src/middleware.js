@@ -9,11 +9,11 @@ function apiPulse(req, res, next) {
             "/debug/stats",
             "/dashboard.js",
             "/dashboard.css",
+            "/style.css",
             "/favicon.ico",
             "/apple-touch-icon.png",
             "/apple-touch-icon-precomposed.png"
         ];
-
         if (ignoredPaths.includes(req.path)) {
             return;
         }
