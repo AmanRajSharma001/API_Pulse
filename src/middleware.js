@@ -1,16 +1,30 @@
 const {performance} = require("node:perf_hooks"); //Node.js Build-in Performance Hook
-
+const stats = require("./stats")
 function apiPulse(req,res,next){
     const start = performance.now();
     res.on("finish",()=>{
         const duration = performance.now()-start;
+        const status = res.statusCode;
+
+        stats.totalRequests++;
+        stats.totalDuration += duration;
+
+        if (status >= 200 && status < 300) {
+            stats.status2xx++;
+        } else if (status >= 400 && status < 500) {
+            stats.status4xx++;
+        } else if (status >= 500 && status < 600) {
+            stats.status5xx++;
+        }
+
         console.log(
             `[ApiPulse] - Method: ${req.method} - ` +
             `Path: ${req.path} - ` +
             `Status: ${res.statusCode} - ` +
             `Duration: ${duration.toFixed(2)} ms`
         );    
-    })
+    });
+
     next();
 }
 
