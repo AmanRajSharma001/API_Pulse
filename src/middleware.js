@@ -1,9 +1,24 @@
 const {performance} = require("node:perf_hooks"); //Node.js Build-in Performance Hook
-const stats = require("./stats")
-function apiPulse(req,res,next){
+const stats = require("./stats");
+
+function apiPulse(req, res, next) {
     const start = performance.now();
-    res.on("finish",()=>{
-        const duration = performance.now()-start;
+    res.on("finish", () => {
+        const ignoredPaths = [
+            "/stats",
+            "/debug/stats",
+            "/dashboard.js",
+            "/dashboard.css",
+            "/favicon.ico",
+            "/apple-touch-icon.png",
+            "/apple-touch-icon-precomposed.png"
+        ];
+
+        if (ignoredPaths.includes(req.path)) {
+            return;
+        }
+
+        const duration = performance.now() - start;
         const status = res.statusCode;
 
         stats.totalRequests++;
@@ -17,26 +32,26 @@ function apiPulse(req,res,next){
             stats.status5xx++;
         }
 
-        stats.recentRequests.unshift({
+        stats.recentRequests.unshift({ //start of the array me add karta data
             method: req.method,
             path: req.path,
-            status: status,
+            status,
             duration: Number(duration.toFixed(2))
         });
 
         if (stats.recentRequests.length > 20) {
             stats.recentRequests.pop();
         }
-        
+
         console.log(
             `[ApiPulse] - Method: ${req.method} - ` +
             `Path: ${req.path} - ` +
-            `Status: ${res.statusCode} - ` +
+            `Status: ${status} - ` +
             `Duration: ${duration.toFixed(2)} ms`
-        );    
+        );
     });
 
     next();
 }
 
-module.exports = {apiPulse};
+module.exports = { apiPulse };
