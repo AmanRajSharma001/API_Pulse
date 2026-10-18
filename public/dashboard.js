@@ -1,11 +1,6 @@
 async function updateDashboard() {
     try {
         const response = await fetch("/debug/stats");
-
-        if (!response.ok) {
-            throw new Error("Failed to fetch stats");
-        }
-
         const stats = await response.json();
 
         document.getElementById("totalRequests").textContent =
@@ -23,8 +18,24 @@ async function updateDashboard() {
         document.getElementById("status5xx").textContent =
             stats.status5xx;
 
+        let rows = "";
+
+        for (let request of stats.recentRequests) {
+            rows += `
+                <tr>
+                    <td>${request.method}</td>
+                    <td>${request.path}</td>
+                    <td>${request.status}</td>
+                    <td>${request.duration} ms</td>
+                </tr>
+            `;
+        }
+
+        document.getElementById("recentRequests").innerHTML =
+            rows || '<tr><td colspan="4">No requests yet</td></tr>';
+
     } catch (error) {
-        console.error("Failed to update dashboard:", error);
+        console.log("Failed to update dashboard:", error);
     }
 }
 
