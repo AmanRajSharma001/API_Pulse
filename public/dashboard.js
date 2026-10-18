@@ -12,6 +12,9 @@ async function updateDashboard() {
         document.getElementById("status2xx").textContent =
             stats.status2xx;
 
+        document.getElementById("status3xx").textContent =
+            stats.status3xx;
+
         document.getElementById("status4xx").textContent =
             stats.status4xx;
 

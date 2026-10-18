@@ -1,15 +1,15 @@
 {
   "name": "apipulse-express",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A lightweight Express API monitoring and statistics toolkit",
   "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js"
   },
   "files": [
-  "src/",
-  "public/",
-  "README.md"
+    "src/",
+    "public/",
+    "README.md"
   ],
   "scripts": {
     "test": "node --test",
