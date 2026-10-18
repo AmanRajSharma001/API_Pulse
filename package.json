@@ -1,8 +1,7 @@
 {
   "name": "api_pulse",
   "version": "1.0.0",
-  "description": "A lightweight Express API monitoring package",
-  "type": "module",
+  "description": "A lightweight Express API monitoring and statistics toolkit",
   "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js"
