@@ -1,56 +1,235 @@
-
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    padding: 32px;
+    min-height: 100vh;
+    padding: 32px 20px;
+    background: #050505;
+    color: #f5f5f5;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: #0f172a;
-    color: #f8fafc;
 }
 
-header {
-    margin-bottom: 32px;
+.dashboard {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px;
+    background: #080808;
+    border: 1px solid #303030;
+    border-radius: 18px;
 }
 
-header h1 {
-    margin-bottom: 8px;
-    font-size: 32px;
+.dashboard-header {
+    padding-bottom: 24px;
+    border-bottom: 1px solid #252525;
 }
 
-header p {
-    color: #94a3b8;
+.dashboard-header h1 {
+    font-size: 34px;
+    font-weight: 750;
+    letter-spacing: -1px;
 }
 
-main {
+.pulse-dot {
+    color: #35c980;
+}
+
+.dashboard-header p {
+    margin-top: 7px;
+    color: #929292;
+    font-size: 14px;
+}
+
+.dashboard-heading {
+    padding: 34px 0;
+    text-align: center;
+}
+
+.dashboard-heading h2 {
+    font-size: 26px;
+    font-weight: 650;
+    letter-spacing: -0.5px;
+}
+
+.dashboard-heading p {
+    margin-top: 9px;
+    color: #929292;
+    font-size: 14px;
+}
+
+.metrics-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
 }
 
-section {
+.metric-card {
+    min-width: 0;
+    padding: 25px;
+    background: #111111;
+    border: 1px solid #292929;
+    border-radius: 13px;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.metric-card:hover {
+    background: #151515;
+    border-color: #414141;
+    transform: translateY(-2px);
+}
+
+.metric-card h3 {
+    margin-bottom: 22px;
+    color: #bdbdbd;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.status-code {
+    color: #777777;
+    font-size: 13px;
+}
+
+.metric-card p {
+    color: #f5f5f5;
+    font-size: 36px;
+    font-weight: 650;
+    letter-spacing: -1px;
+    overflow-wrap: anywhere;
+}
+
+.metric-card .success-value {
+    color: #35c980;
+}
+
+.metric-card .client-error-value {
+    color: #f0b44d;
+}
+
+.metric-card .server-error-value {
+    color: #ff6868;
+}
+
+.metric-description {
+    display: block;
+    margin-top: 12px;
+    color: #777777;
+    font-size: 12px;
+}
+
+.dashboard-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px solid #252525;
+    color: #929292;
+    font-size: 13px;
+}
+
+.live-indicator {
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    background: #35c980;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #35c98055;
+}
+
+.recent-requests {
+    margin-top: 28px;
     padding: 24px;
-    border: 1px solid #334155;
-    border-radius: 16px;
-    background: #1e293b;
+    background: #111111;
+    border: 1px solid #292929;
+    border-radius: 13px;
 }
 
-section h2 {
-    margin-top: 0;
-    font-size: 16px;
-    color: #cbd5e1;
+.recent-requests h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
 }
 
-section p {
-    margin-bottom: 0;
-    font-size: 28px;
-    font-weight: 700;
+.recent-description {
+    color: #929292;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.recent-requests table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.recent-requests th,
+.recent-requests td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #292929;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.recent-requests th {
+    color: #929292;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.recent-requests td {
+    color: #e5e5e5;
+    font-size: 14px;
+}
+
+.recent-requests tbody tr:last-child td {
+    border-bottom: none;
 }
 
 @media (max-width: 600px) {
     body {
-        padding: 16px;
+        padding: 14px;
+    }
+
+    .dashboard {
+        padding: 20px 14px;
+        border-radius: 14px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 29px;
+    }
+
+    .dashboard-heading {
+        padding: 28px 0;
+    }
+
+    .dashboard-heading h2 {
+        font-size: 21px;
+    }
+
+    .metrics-grid {
+        grid-template-columns: 1fr;
+        gap: 13px;
+    }
+
+    .metric-card {
+        padding: 22px;
+    }
+
+    .metric-card p {
+        font-size: 32px;
     }
 }
