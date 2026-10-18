@@ -17,6 +17,17 @@ function apiPulse(req,res,next){
             stats.status5xx++;
         }
 
+        stats.recentRequests.unshift({
+            method: req.method,
+            path: req.path,
+            status: status,
+            duration: Number(duration.toFixed(2))
+        });
+
+        if (stats.recentRequests.length > 20) {
+            stats.recentRequests.pop();
+        }
+        
         console.log(
             `[ApiPulse] - Method: ${req.method} - ` +
             `Path: ${req.path} - ` +
